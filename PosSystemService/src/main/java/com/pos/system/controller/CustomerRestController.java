@@ -76,15 +76,15 @@ public class CustomerRestController {
 	}
 
 	@PutMapping("/customers/{id}")
-	public ResponseEntity updateCustomer(@PathVariable Long id, @RequestBody Customer customer) {
+	public ResponseEntity<? extends Object> updateCustomer(@PathVariable Long id, @RequestBody Customer customer) {
 
 		customer = customerDAO.update(id, customer);
 
 		if (null == customer) {
-			return new ResponseEntity("No Customer found for ID " + id, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<String>("No Customer found for ID " + id, HttpStatus.NOT_FOUND);
 		}
 
-		return new ResponseEntity(customer, HttpStatus.OK);
+		return new ResponseEntity<Customer>(customer, HttpStatus.OK);
 	}
 
 }
